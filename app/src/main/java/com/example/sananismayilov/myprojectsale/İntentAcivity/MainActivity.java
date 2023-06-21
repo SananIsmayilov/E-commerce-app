@@ -1,4 +1,4 @@
-package com.example.sananismayilov.myprojectsale;
+package com.example.sananismayilov.myprojectsale.İntentAcivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -7,6 +7,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 
+import com.example.sananismayilov.myprojectsale.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

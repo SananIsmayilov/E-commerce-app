@@ -1,24 +1,20 @@
 package com.example.sananismayilov.myprojectsale.Adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sananismayilov.myprojectsale.Fragments.FragmentCart;
+import com.example.sananismayilov.myprojectsale.İntentAcivity.DetailsActivity;
+import com.example.sananismayilov.myprojectsale.Fragments.FragmentHomeDirections;
 import com.example.sananismayilov.myprojectsale.R;
 import com.example.sananismayilov.myprojectsale.databinding.CardviewgorunumBinding;
-import com.example.sananismayilov.myprojectsale.databinding.FragmentCartBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +36,7 @@ ArrayList<Conteyner> arrayList;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull viewholder holder, @SuppressLint("RecyclerView") int position) {
         holder.binding.textViewnamecard.setText(arrayList.get(position).ad);
         holder.binding.textViewmodelcard.setText(arrayList.get(position).model);
         holder.binding.textViewsalecard.setText(arrayList.get(position).qiymet);
@@ -53,6 +49,14 @@ ArrayList<Conteyner> arrayList;
                     Snackbar.make(v, "Səbətə əlavə edildi!", Snackbar.LENGTH_SHORT)
                             .setTextColor(Color.WHITE)
                             .setBackgroundTint(Color.RED)
+                            .setAction("Səbətə daxil olun", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    FragmentHomeDirections.ActionFragmentHomeToFragmentCart actionFragmentHomeToFragmentCart =
+                                            FragmentHomeDirections.actionFragmentHomeToFragmentCart( arrayList.get(position).ad,arrayList.get(position).model,arrayList.get(position).picture,arrayList.get(position).qiymet);
+                                    Navigation.findNavController(holder.binding.heart).navigate(actionFragmentHomeToFragmentCart);
+                                }
+                            })
                             .show();
                     b = true;
                 } else {
@@ -62,7 +66,17 @@ ArrayList<Conteyner> arrayList;
 
             }
         });
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DetailsActivity.class);
+                intent.putExtra("ad",arrayList.get(position).ad);
+                intent.putExtra("model",arrayList.get(position).model);
+                intent.putExtra("qiymet",arrayList.get(position).qiymet);
+                intent.putExtra("sekil",arrayList.get(position).picture);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
 

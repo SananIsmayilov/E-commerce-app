@@ -1,6 +1,8 @@
 package com.example.sananismayilov.myprojectsale.Adapters;
 
-public class Conteyner {
+import java.io.Serializable;
+
+public class Conteyner implements Serializable {
     public String picture;
     public String ad;
     public String model;

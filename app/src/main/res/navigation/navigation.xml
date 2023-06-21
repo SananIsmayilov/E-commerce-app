@@ -9,12 +9,29 @@
         android:id="@+id/fragmentHome"
         android:name="com.example.sananismayilov.myprojectsale.Fragments.FragmentHome"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentCart"
+            app:destination="@id/fragmentCart" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentCart"
         android:name="com.example.sananismayilov.myprojectsale.Fragments.FragmentCart"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <argument
+            android:name="ad"
+            app:argType="string" />
+        <argument
+            android:name="model"
+            app:argType="string" />
+        <argument
+            android:name="picture"
+            app:argType="string" />
+        <argument
+            android:name="price"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentProfile"
         android:name="com.example.sananismayilov.myprojectsale.Fragments.FragmentProfile"
