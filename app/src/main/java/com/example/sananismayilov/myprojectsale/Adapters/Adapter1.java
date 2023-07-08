@@ -52,9 +52,7 @@ ArrayList<Conteyner> arrayList;
                             .setAction("Səbətə daxil olun", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    FragmentHomeDirections.ActionFragmentHomeToFragmentCart actionFragmentHomeToFragmentCart =
-                                            FragmentHomeDirections.actionFragmentHomeToFragmentCart( arrayList.get(position).ad,arrayList.get(position).model,arrayList.get(position).picture,arrayList.get(position).qiymet);
-                                    Navigation.findNavController(holder.binding.heart).navigate(actionFragmentHomeToFragmentCart);
+                                    Navigation.findNavController(holder.binding.imageviewcard).navigate(R.id.fragmentCart);
                                 }
                             })
                             .show();
@@ -66,7 +64,7 @@ ArrayList<Conteyner> arrayList;
 
             }
         });
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.binding.imageviewcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), DetailsActivity.class);
