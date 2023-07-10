@@ -55,6 +55,7 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.viewholder> {
         if (cursor.getCount() > 0) {
             holder.binding.heart.setBackgroundResource(R.drawable.redheart);
             b = true;
+
         } else {
             holder.binding.heart.setBackgroundResource(R.drawable.cart);
             b = false;
@@ -66,6 +67,13 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.viewholder> {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
+                Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM selectedproductsModel WHERE model = ?", new String[]{arrayList.get(position).model});
+                if (cursor.getCount() > 0) {
+                    b = true;
+                } else {
+                    b = false;
+                }
+                cursor.close();
                 if (!b) {
                     holder.binding.heart.setBackgroundResource(R.drawable.redheart);
 
