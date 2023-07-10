@@ -7,7 +7,7 @@
         android:id="@+id/catalogdetailsactivitypicture"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:background="@color/ColorOnPrimary"
+        android:background="@color/white"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

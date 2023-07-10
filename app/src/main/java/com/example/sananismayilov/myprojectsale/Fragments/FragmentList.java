@@ -1,6 +1,7 @@
 package com.example.sananismayilov.myprojectsale.Fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sananismayilov.myprojectsale.R;
+import com.example.sananismayilov.myprojectsale.İntentAcivity.CatalogDetails;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +62,9 @@ Animation animation,animation1;
        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               Toast.makeText(getContext(), CatalogArraylist.get(position), Toast.LENGTH_SHORT).show();
+               Intent intent = new Intent(view.getContext(), CatalogDetails.class);
+               intent.putExtra("sentCatalog", CatalogArraylist.get(position));
+               startActivity(intent);
            }
        });
         return view;
@@ -69,17 +73,26 @@ Animation animation,animation1;
 
     public void getData(){
         CatalogArraylist = new ArrayList<>();
-        String url = "https://6474d7397de100807b1bd749.mockapi.io/Catalog";
+        String url = "https://senan2.000webhostapp.com/SaleProject/ProductSaleProject/getAllData.php";
      StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
          @Override
          public void onResponse(String response) {
              try {
-                 JSONArray array = new JSONArray(response);
+                JSONObject object = new JSONObject(response);
+                JSONArray array = object.getJSONArray("Products");
                  for(int i=0;i<array.length();i++){
+                     boolean b =false;
                      JSONObject jsonObject = array.getJSONObject(i);
-                     String k = jsonObject.getString("catalog");
-                     System.out.println("salam"+k);
-                     CatalogArraylist.add(k);
+                     String k = jsonObject.getString("product_name");
+                     for(String f : CatalogArraylist){
+                         if(f.equals(k)){
+                             b= true;
+                         }
+                     }
+                     if(!b){
+                         CatalogArraylist.add(k);
+                     }
+
                  }
                  progressBar.setAnimation(animation);
                  Collections.sort(CatalogArraylist);
@@ -93,7 +106,6 @@ Animation animation,animation1;
 
 
              } catch (JSONException e) {
-                 System.out.println("salame"+e.toString());
                  throw new RuntimeException(e);
              }
          }
@@ -101,16 +113,11 @@ Animation animation,animation1;
      }, new Response.ErrorListener() {
          @Override
          public void onErrorResponse(VolleyError error) {
-             System.out.println("salam " + error.toString());
+
          }
      });
         Volley.newRequestQueue(getContext()).add(request);
 
     }
 
-    @Override
-    public void onPause() {
-        Volley.newRequestQueue(getContext()).stop();
-        super.onPause();
-    }
 }
