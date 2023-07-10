@@ -60,7 +60,7 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.viewholder> {
                 say++;
                 break;
             }
-            b = (say == 1) ? false : true;
+            b = (say <= 1) ? false : true;
         }
 
         holder.binding.heart.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +84,7 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.viewholder> {
                     statement.bindString(3, arrayList.get(position).qiymet);
                     statement.bindString(4, arrayList.get(position).picture);
                     statement.execute();
-                    Snackbar.make(v, "Bəyənilın məhsullara əlavə edildi!", Snackbar.LENGTH_SHORT)
+                    Snackbar.make(v, "Bəyənilən məhsullara əlavə edildi!", Snackbar.LENGTH_SHORT)
                             .setTextColor(Color.WHITE)
                             .setBackgroundTint(Color.parseColor("#317ac7"))
                             .setAction("Səbətə daxil olun", new View.OnClickListener() {
