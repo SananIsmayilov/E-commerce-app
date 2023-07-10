@@ -72,6 +72,7 @@ public class FragmentCart extends Fragment {
         adapterToCartFragment = new AdapterToCartFragment(conteynerToFragmentCartArrayList);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recyclerView.setAdapter(adapterToCartFragment);
+        adapterToCartFragment.notifyDataSetChanged();
     }
 
 }

@@ -37,7 +37,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class FragmentHome extends Fragment {
+public class FragmentHome extends Fragment  {
  ArrayList<Conteyner> arrayList;
     Adapter1 adapter1 ;
     RecyclerView recyclerView;
@@ -93,6 +93,7 @@ public class FragmentHome extends Fragment {
                         recyclerView.setHasFixedSize(true);
                         progressBar.setAnimation(animation);
                         recyclerView.setAdapter(adapter1);
+                        adapter1.notifyDataSetChanged();
                     }
 
                 } catch (JSONException e) {

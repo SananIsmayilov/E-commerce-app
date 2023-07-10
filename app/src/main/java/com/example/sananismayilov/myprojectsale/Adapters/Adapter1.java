@@ -28,7 +28,7 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.viewholder> {
     ArrayList<Conteyner> arrayList;
 
     SQLiteDatabase sqLiteDatabase;
-   private boolean b;
+    private boolean b;
 
     public Adapter1(ArrayList<Conteyner> arrayList) {
         this.arrayList = arrayList;
@@ -51,24 +51,21 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.viewholder> {
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS selectedproducts (ad VARCHAR(255),model VARCHAR(255) , qiymet VARCHAR(255) , picture VARCHAR(255))");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS selectedproductsModel (model VARCHAR(255))");
 
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT*FROM selectedproductsModel", null);
-        int indextoselectedid = cursor.getColumnIndex("model");
-        int say = 0;
-        while (cursor.moveToNext()) {
-            if (arrayList.get(position).model.equals(cursor.getString(indextoselectedid))) {
-                holder.binding.heart.setBackgroundResource(R.drawable.redheart);
-                say++;
-                break;
-            }
-            b = (say <= 1) ? false : true;
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM selectedproductsModel WHERE model = ?", new String[]{arrayList.get(position).model});
+        if (cursor.getCount() > 0) {
+            holder.binding.heart.setBackgroundResource(R.drawable.redheart);
+            b = true;
+        } else {
+            holder.binding.heart.setBackgroundResource(R.drawable.cart);
+            b = false;
         }
+        cursor.close();
+
 
         holder.binding.heart.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
-
-
                 if (!b) {
                     holder.binding.heart.setBackgroundResource(R.drawable.redheart);
 
@@ -77,14 +74,15 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.viewholder> {
                     statement1.bindString(1, arrayList.get(position).model);
                     statement1.execute();
 
-                    String query = "INSERT INTO selectedproducts (ad,model,qiymet,picture) VALUES (?,?,?,?)";
+                    String query = "INSERT INTO selectedproducts (ad, model, qiymet, picture) VALUES (?, ?, ?, ?)";
                     SQLiteStatement statement = sqLiteDatabase.compileStatement(query);
                     statement.bindString(1, arrayList.get(position).ad);
                     statement.bindString(2, arrayList.get(position).model);
                     statement.bindString(3, arrayList.get(position).qiymet);
                     statement.bindString(4, arrayList.get(position).picture);
                     statement.execute();
-                    Snackbar.make(v, "Bəyənilən məhsullara əlavə edildi!", Snackbar.LENGTH_SHORT)
+
+                    Snackbar.make(v, "Məhsul seçildi!", Snackbar.LENGTH_SHORT)
                             .setTextColor(Color.WHITE)
                             .setBackgroundTint(Color.parseColor("#317ac7"))
                             .setAction("Səbətə daxil olun", new View.OnClickListener() {
@@ -97,9 +95,7 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.viewholder> {
                             .show();
 
                     b = true;
-
                 } else {
-
                     SQLiteStatement statement = sqLiteDatabase.compileStatement("DELETE FROM selectedproductsModel WHERE model = ?");
                     statement.bindString(1, arrayList.get(position).model);
                     statement.execute();
@@ -109,17 +105,17 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.viewholder> {
                     statement1.execute();
 
                     holder.binding.heart.setBackgroundResource(R.drawable.cart);
-                    b = false;
 
-                    Snackbar.make(v, "Seçdiyiniz məhsul bəyənilən məhsullar sırasından silindi", Snackbar.LENGTH_SHORT)
+                    Snackbar.make(v, "Seçdiyiniz məhsul seçilmiş məhsulların siyahısından çıxarıldı", Snackbar.LENGTH_SHORT)
                             .setTextColor(Color.WHITE)
                             .setBackgroundTint(Color.parseColor("#317ac7"))
                             .show();
+
+                    b = false;
                 }
-
-
             }
         });
+
         holder.binding.imageviewcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sananismayilov.myprojectsale.R;
 import com.example.sananismayilov.myprojectsale.databinding.ViewforcartfragmentBinding;
 import com.squareup.picasso.Picasso;
 
@@ -33,7 +34,10 @@ ArrayList <ConteynerToFragmentCart> conteynerToFragmentCarts;
         holder.binding.cartfragmentmodel.setText(conteynerToFragmentCarts.get(position).getModeltofragmentcart());
         holder.binding.cartfragmentqiymet.setText(conteynerToFragmentCarts.get(position).getPricetofragmentcart());
         Picasso.get().load(conteynerToFragmentCarts.get(position).getPicturetofragmentcart()).into(holder.binding.cartfragmentpicture);
-    }}
+    }
+
+
+    }
 
     @Override
     public int getItemCount() {
