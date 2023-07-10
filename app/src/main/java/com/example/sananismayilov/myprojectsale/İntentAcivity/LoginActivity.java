@@ -61,7 +61,7 @@ private  SharedPreferences.Editor editor;
 
                       if (code == 1) {
                           String token = jsonObject.getString("token");
-                          editor.putString("token-user", token);
+                          editor.putString("user-token", token);
                           editor.apply();
                           Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                           startActivity(intent);

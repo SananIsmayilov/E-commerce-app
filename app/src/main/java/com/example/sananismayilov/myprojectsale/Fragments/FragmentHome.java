@@ -1,8 +1,11 @@
 package com.example.sananismayilov.myprojectsale.Fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,8 +17,8 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -41,6 +44,7 @@ public class FragmentHome extends Fragment {
     ProgressBar progressBar;
     Animation animation;
     ImageView imageView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,19 +66,21 @@ public class FragmentHome extends Fragment {
     }
     public void getData(){
         arrayList = new ArrayList<>();
-        String url = "https://6474d7397de100807b1bd749.mockapi.io/Main";
+        String url = "https://senan2.000webhostapp.com/SaleProject/ProductSaleProject/getAllData.php";
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                System.out.println("Resspons" + response.toString());
                 try {
-                    JSONArray jsonArray = new JSONArray(response);
+                    JSONObject object1 = new JSONObject(response);
+                    JSONArray jsonArray = object1.getJSONArray("Products");
                     for(int i=0;i< jsonArray.length();i++){
                         JSONObject object = jsonArray.getJSONObject(i);
-                        String picture = object.getString("picture");
-                        String name = object.getString("name");
-                        String qiymet = object.getString("qiymet");
-                        String model = object.getString("model");
-                        int id = object.getInt("id");
+                        String picture = object.getString("product_picture");
+                        String name = object.getString("product_name");
+                        String qiymet = object.getString("product_price");
+                        String model = object.getString("product_model");
+                        int id = object.getInt("product_id");
                         Conteyner conteyner = new Conteyner(picture,name,model,qiymet,id);
                         arrayList.add(conteyner);
                     }
@@ -103,4 +109,8 @@ public class FragmentHome extends Fragment {
         Volley.newRequestQueue(getContext()).add(request);
 
     }
+
+
+
+
 }
