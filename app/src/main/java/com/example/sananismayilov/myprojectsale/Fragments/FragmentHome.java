@@ -28,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sananismayilov.myprojectsale.Adapters.Adapter1;
 import com.example.sananismayilov.myprojectsale.Adapters.Conteyner;
+import com.example.sananismayilov.myprojectsale.HttpsTrustManager;
 import com.example.sananismayilov.myprojectsale.R;
 
 import org.json.JSONArray;
@@ -44,6 +45,7 @@ public class FragmentHome extends Fragment  {
     ProgressBar progressBar;
     Animation animation;
     ImageView imageView;
+    TextView textView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class FragmentHome extends Fragment  {
     }
     public void getData(){
         arrayList = new ArrayList<>();
+        HttpsTrustManager.allowAllSSL();
         String url = "https://senan2.000webhostapp.com/SaleProject/ProductSaleProject/getAllData.php";
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -104,6 +107,7 @@ public class FragmentHome extends Fragment  {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                System.out.println("errorerror " + error.toString());
                 Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
             }
         });

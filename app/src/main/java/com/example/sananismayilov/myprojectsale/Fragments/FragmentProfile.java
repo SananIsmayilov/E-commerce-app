@@ -1,22 +1,46 @@
 package com.example.sananismayilov.myprojectsale.Fragments;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.sananismayilov.myprojectsale.R;
+import com.example.sananismayilov.myprojectsale.İntentAcivity.LoginandregisterActivity;
+import com.example.sananismayilov.myprojectsale.İntentAcivity.User;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class FragmentProfile extends Fragment {
-
-
-
-
-
+    TextView textViewsignout,textViewnameandsurname;
+    String k="";
+    Intent intent;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +50,75 @@ public class FragmentProfile extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View v = inflater.inflate(R.layout.fragment_profile, container, false);
+        textViewsignout = v.findViewById(R.id.profileitem9);
+        textViewnameandsurname = v.findViewById(R.id.text);
+        textViewnameandsurname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getContext(), User.class);
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity",MODE_PRIVATE);
+                String tokens = sharedPreferences.getString("user-token","");
+                intent.putExtra("token",tokens);
+                startActivity(intent);
+            }
+        });
+        
+        
+        
+        
+        
+        getuserData();
+        return v;
     }
+
+
+    public void getuserData(){
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity",MODE_PRIVATE);
+        String tokens = sharedPreferences.getString("user-token","");
+       if(!tokens.equals("")){
+           String url = "https://senan2.000webhostapp.com/SaleProject/loginSaleProject/getUser.php";
+           StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+               @Override
+               public void onResponse(String response) {
+                   try {
+                       JSONObject object = new JSONObject(response);
+                       JSONArray array = object.getJSONArray("User");
+                       for (int i = 0;i<array.length();i++){
+                           JSONObject jsonObject = array.getJSONObject(i);
+                            k = jsonObject.getString("name");
+                            k += " ";
+                            k += jsonObject.getString("surname");
+
+                       }
+                       textViewnameandsurname.setText(k);
+
+
+
+                   } catch (JSONException e) {
+                       throw new RuntimeException(e);
+                   }
+               }
+           }, new Response.ErrorListener() {
+               @Override
+               public void onErrorResponse(VolleyError error) {
+
+               }
+           }){
+
+               @Nullable
+               @Override
+               protected Map<String, String> getParams() throws AuthFailureError {
+                   Map<String,String> map = new HashMap<>();
+                   map.put("token",tokens);
+                   return map;
+               }
+           };
+           Volley.newRequestQueue(getContext()).add(request);
+       }
+
+
+
+    }
+
 }
