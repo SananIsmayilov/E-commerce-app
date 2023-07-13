@@ -2,6 +2,8 @@ package com.example.sananismayilov.myprojectsale.Fragments;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,6 +43,7 @@ public class FragmentProfile extends Fragment {
     TextView textViewsignout,textViewnameandsurname;
     String k="";
     Intent intent;
+    SharedPreferences sharedPreferences;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +67,35 @@ public class FragmentProfile extends Fragment {
             }
         });
         
-        
-        
+        textViewsignout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(v.getContext());
+                alertDialog.setMessage("Hesabınızdan çıxış etmək istəyirsiniz?");
+                alertDialog.setTitle("Çıxış");
+                alertDialog.setIcon(R.drawable.baseline_logout_24);
+                alertDialog.setPositiveButton("Bəli", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        sharedPreferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("user-token","null");
+                        editor.apply();
+                        Intent intent1 = new Intent(getContext(), LoginandregisterActivity.class);
+                        startActivity(intent1);
+                    }
+                }).setNegativeButton("Xeyr", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        dialog.cancel();
+                    }
+                });
+                alertDialog.show();
+
+
+            }
+        });
         
         
         getuserData();
@@ -116,9 +146,6 @@ public class FragmentProfile extends Fragment {
            };
            Volley.newRequestQueue(getContext()).add(request);
        }
-
-
-
     }
 
 }

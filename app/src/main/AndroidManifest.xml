@@ -35,6 +35,7 @@
         </activity>
         <activity
             android:name=".İntentAcivity.DetailsActivity"
+            android:theme="@style/customstyle"
             android:exported="false" />
         <activity
             android:name=".İntentAcivity.MainActivity"

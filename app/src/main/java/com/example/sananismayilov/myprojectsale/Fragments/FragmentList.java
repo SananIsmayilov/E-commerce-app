@@ -55,7 +55,7 @@ Animation animation,animation1;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
-        getData();
+
         listView = view.findViewById(R.id.listview);
         progressBar = view.findViewById(R.id.progress);
        animation =  AnimationUtils.loadAnimation(getContext(),R.anim.animation);
@@ -67,6 +67,7 @@ Animation animation,animation1;
                startActivity(intent);
            }
        });
+        getData();
         return view;
 
     }
@@ -96,14 +97,6 @@ Animation animation,animation1;
                  }
                  progressBar.setAnimation(animation);
                  Collections.sort(CatalogArraylist);
-                 if(CatalogArraylist.size()==0){
-                     Toast.makeText(getContext(), "Bos", Toast.LENGTH_SHORT).show();
-                 }
-                 else{
-                     arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,CatalogArraylist);
-                     listView.setAdapter(arrayAdapter);
-                 }
-
 
              } catch (JSONException e) {
                  throw new RuntimeException(e);

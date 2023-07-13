@@ -122,4 +122,9 @@ public class LoginandregisterActivity extends AppCompatActivity {
         startActivity(intent1);
     }
 
+    @Override
+    public void onBackPressed() {
+        android.os.Process.killProcess(android.os.Process.myPid());
+        super.onBackPressed();
+    }
 }
