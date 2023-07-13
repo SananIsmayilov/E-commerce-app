@@ -3,9 +3,11 @@ package com.example.sananismayilov.myprojectsale.Fragments;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -44,6 +46,7 @@ public class FragmentProfile extends Fragment {
     String k="";
     Intent intent;
     SharedPreferences sharedPreferences;
+    SQLiteDatabase database;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,7 @@ public class FragmentProfile extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         textViewsignout = v.findViewById(R.id.profileitem9);
         textViewnameandsurname = v.findViewById(R.id.text);
+
         textViewnameandsurname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +74,7 @@ public class FragmentProfile extends Fragment {
         textViewsignout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                database = v.getContext().openOrCreateDatabase("SelectedProducts", Context.MODE_PRIVATE, null);
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(v.getContext());
                 alertDialog.setMessage("Hesabınızdan çıxış etmək istəyirsiniz?");
                 alertDialog.setTitle("Çıxış");
@@ -77,6 +82,8 @@ public class FragmentProfile extends Fragment {
                 alertDialog.setPositiveButton("Bəli", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        database.execSQL("DELETE FROM selectedproductsModel");
+                        database.execSQL("DELETE FROM selectedproducts");
                         sharedPreferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("user-token","null");
