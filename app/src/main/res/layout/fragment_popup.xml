@@ -72,8 +72,8 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="300dp"
-        android:layout_height="70dp"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="#03A9F4"
         android:text="Sifariş ver"
