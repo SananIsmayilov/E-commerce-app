@@ -41,13 +41,14 @@ import java.util.Map;
 
 
 public class PopupFragment extends Fragment {
-    TextView textViewad,textViewmodel,textViewsale;
+    TextView textViewad,textViewmodel,textViewsale,textViewquantity;
     ImageView imageView;
-    Button button;
+    Button button,btnplus,btnminus;
     Animation animation;
     Intent intent;
     ProgressBar progressBar;
     SharedPreferences preferences;
+    int i = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,10 @@ public class PopupFragment extends Fragment {
         button = v.findViewById(R.id.buttonorder);
         animation = AnimationUtils.loadAnimation(getContext(),R.anim.animation2);
         progressBar = v.findViewById(R.id.progressbar1);
+        btnminus = v.findViewById(R.id.orderminus);
+        btnplus = v.findViewById(R.id.orderplus);
+        textViewquantity = v.findViewById(R.id.orderquantity);
+
 
         textViewad.setText(intent.getStringExtra("ad"));
         textViewmodel.setText(intent.getStringExtra("model"));
@@ -93,12 +98,34 @@ public class PopupFragment extends Fragment {
               preferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity",MODE_PRIVATE);
               String tokens = preferences.getString("user-token","");
               if(!tokens.equals("")){
-                insertorder(intent.getStringExtra("ad"), intent.getStringExtra("model"),tokens,v);}
+                insertorder(intent.getStringExtra("ad"), intent.getStringExtra("model"),tokens,i,v);}
             }
         });
+
+        btnplus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i++;
+                textViewquantity.setText(String.valueOf(i));
+            }
+        });
+        btnminus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(i>1){
+                    i--;
+                }else {
+                  i=1;
+                }
+
+                textViewquantity.setText(String.valueOf(i));
+            }
+        });
+
+
         return v ;
     }
-    public void insertorder(String name,String model,String token,View v){
+    public void insertorder(String name,String model,String token,int quantity,View v){
         String url = "https://senan2.000webhostapp.com/SaleProject/ProductSaleProject/insertuserorder.php";
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -131,6 +158,7 @@ public class PopupFragment extends Fragment {
                 stringMap.put("product_name",name);
                 stringMap.put("product_model",model);
                 stringMap.put("status", String.valueOf(status));
+                stringMap.put("quantity",String.valueOf(quantity));
                 return stringMap;
             }
         };
