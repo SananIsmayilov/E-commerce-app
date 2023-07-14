@@ -60,7 +60,6 @@ SharedPreferences preferences;
                             String productname= object1.getString("product_name");
                             String productmodel = object1.getString("product_model");
                             String status = object1.getString("status");
-                            System.out.println("PRODUCTS" + productmodel + productname + status);
                             ConteynerToOrders conteyner = new ConteynerToOrders(productname,productmodel,status);
                             ordersArrayList.add(conteyner);
                         }
