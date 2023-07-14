@@ -119,16 +119,18 @@ public class PopupFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
             }
         }){
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+                int status = 0;
                 Map<String,String> stringMap = new HashMap<>();
                 stringMap.put("user_token",token);
                 stringMap.put("product_name",name);
                 stringMap.put("product_model",model);
+                stringMap.put("status", String.valueOf(status));
                 return stringMap;
             }
         };
