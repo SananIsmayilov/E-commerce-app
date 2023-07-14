@@ -28,18 +28,16 @@ public class AdapterToOrders extends RecyclerView.Adapter<AdapterToOrders.Orders
 
     @Override
     public void onBindViewHolder(@NonNull Ordersholder holder, int position) {
-        holder.binding.ordertoname.setText(orders.get(position).getProduct_name());
-        holder.binding.ordertomodel.setText(orders.get(position).getProduct_model());
+        holder.binding.ordertoname1.setText(orders.get(position).getProduct_name());
+        holder.binding.ordertomodel1.setText(orders.get(position).getProduct_model());
         String status = orders.get(position).getStatus();
-
         if(status.equals("1")){
-            holder.binding.ordertoname.setTextColor(Color.GREEN);
-            holder.binding.ordertomodel.setTextColor(Color.GREEN);
-        } else {
-            holder.binding.ordertoname.setTextColor(Color.BLACK);
-            holder.binding.ordertomodel.setTextColor(Color.BLACK);
+            holder.binding.ordertomodel1.setTextColor(Color.GREEN);
+            holder.binding.ordertoname1.setTextColor(Color.GREEN);
+        }else {
+            holder.binding.ordertomodel1.setTextColor(Color.BLACK);
+            holder.binding.ordertoname1.setTextColor(Color.BLACK);
         }
-
     }
 
     @Override
