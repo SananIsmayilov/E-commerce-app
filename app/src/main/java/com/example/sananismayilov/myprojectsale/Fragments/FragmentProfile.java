@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -38,16 +39,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Method;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class FragmentProfile extends Fragment {
-    TextView textViewsignout,textViewnameandsurname,textVieworder;
-    String k="";
+    TextView textViewsignout, textViewnameandsurname, textVieworder, textViewinstagram;
+    String k = "";
     Intent intent;
     SharedPreferences sharedPreferences;
     SQLiteDatabase database;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,18 +64,19 @@ public class FragmentProfile extends Fragment {
         textViewsignout = v.findViewById(R.id.profileitem9);
         textViewnameandsurname = v.findViewById(R.id.text);
         textVieworder = v.findViewById(R.id.profileitemorder);
+        textViewinstagram = v.findViewById(R.id.profileitem4);
 
         textViewnameandsurname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent = new Intent(getContext(), User.class);
-                SharedPreferences sharedPreferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity",MODE_PRIVATE);
-                String tokens = sharedPreferences.getString("user-token","");
-                intent.putExtra("token",tokens);
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity", MODE_PRIVATE);
+                String tokens = sharedPreferences.getString("user-token", "");
+                intent.putExtra("token", tokens);
                 startActivity(intent);
             }
         });
-        
+
         textViewsignout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +92,7 @@ public class FragmentProfile extends Fragment {
                         database.execSQL("DELETE FROM selectedproducts");
                         sharedPreferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("user-token","null");
+                        editor.putString("user-token", "null");
                         editor.apply();
                         Intent intent1 = new Intent(getContext(), LoginandregisterActivity.class);
                         startActivity(intent1);
@@ -112,56 +116,67 @@ public class FragmentProfile extends Fragment {
                 startActivity(intent1);
             }
         });
-        
-        
+
+        textViewinstagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gottolink("https://www.instagram.com/_i.sanan_");
+            }
+        });
+
+
         getuserData();
         return v;
     }
 
 
-    public void getuserData(){
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity",MODE_PRIVATE);
-        String tokens = sharedPreferences.getString("user-token","");
-       if(!tokens.equals("")){
-           String url = "https://senan2.000webhostapp.com/SaleProject/loginSaleProject/getUser.php";
-           StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-               @Override
-               public void onResponse(String response) {
-                   try {
-                       JSONObject object = new JSONObject(response);
-                       JSONArray array = object.getJSONArray("User");
-                       for (int i = 0;i<array.length();i++){
-                           JSONObject jsonObject = array.getJSONObject(i);
+    public void getuserData() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity", MODE_PRIVATE);
+        String tokens = sharedPreferences.getString("user-token", "");
+        if (!tokens.equals("")) {
+            String url = "https://senan2.000webhostapp.com/SaleProject/loginSaleProject/getUser.php";
+            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject object = new JSONObject(response);
+                        JSONArray array = object.getJSONArray("User");
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject jsonObject = array.getJSONObject(i);
                             k = jsonObject.getString("name");
                             k += " ";
                             k += jsonObject.getString("surname");
 
-                       }
-                       textViewnameandsurname.setText(k);
+                        }
+                        textViewnameandsurname.setText(k);
 
 
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
-                   } catch (JSONException e) {
-                       throw new RuntimeException(e);
-                   }
-               }
-           }, new Response.ErrorListener() {
-               @Override
-               public void onErrorResponse(VolleyError error) {
+                }
+            }) {
 
-               }
-           }){
-
-               @Nullable
-               @Override
-               protected Map<String, String> getParams() throws AuthFailureError {
-                   Map<String,String> map = new HashMap<>();
-                   map.put("token",tokens);
-                   return map;
-               }
-           };
-           Volley.newRequestQueue(getContext()).add(request);
-       }
+                @Nullable
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("token", tokens);
+                    return map;
+                }
+            };
+            Volley.newRequestQueue(getContext()).add(request);
+        }
     }
+    public  void gottolink(String link){
+        Intent intent1 = new Intent(Intent.ACTION_VIEW);
+        intent1.setData(Uri.parse(link));
+        startActivity(intent1);
 
+    }
 }
