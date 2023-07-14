@@ -74,7 +74,7 @@
         android:id="@+id/buttonorder"
         android:layout_width="280dp"
         android:layout_height="60dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="#03A9F4"
         android:text="Sifariş ver"
         android:textAllCaps="false"
@@ -83,5 +83,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailssale" />
+        app:layout_constraintTop_toBottomOf="@+id/orderquantity" />
+
+    <TextView
+        android:id="@+id/orderquantity"
+        android:layout_width="55dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/backforedittext"
+        android:text="1"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@id/buttonorder"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detailssale" />
+
+    <Button
+        android:layout_width="20dp"
+        android:id="@+id/orderplus"
+        android:layout_height="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/plus"
+        app:layout_constraintBottom_toBottomOf="@id/orderquantity"
+        app:layout_constraintLeft_toRightOf="@+id/orderquantity"
+        app:layout_constraintTop_toTopOf="@+id/orderquantity" />
+
+    <Button
+        android:layout_width="20dp"
+        android:id="@+id/orderminus"
+        android:layout_height="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/minus"
+        app:layout_constraintBottom_toBottomOf="@id/orderquantity"
+        app:layout_constraintRight_toLeftOf="@+id/orderquantity"
+        app:layout_constraintTop_toTopOf="@+id/orderquantity" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
