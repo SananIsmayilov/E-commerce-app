@@ -71,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/detailsmodel" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonorder"
         android:layout_width="280dp"
         android:layout_height="60dp"
         android:layout_marginTop="15dp"
