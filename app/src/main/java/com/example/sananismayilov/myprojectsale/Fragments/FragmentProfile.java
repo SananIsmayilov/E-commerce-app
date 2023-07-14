@@ -31,6 +31,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.sananismayilov.myprojectsale.R;
 import com.example.sananismayilov.myprojectsale.İntentAcivity.LoginandregisterActivity;
 import com.example.sananismayilov.myprojectsale.İntentAcivity.User;
+import com.example.sananismayilov.myprojectsale.İntentAcivity.UserOrder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +43,7 @@ import java.util.Map;
 
 
 public class FragmentProfile extends Fragment {
-    TextView textViewsignout,textViewnameandsurname;
+    TextView textViewsignout,textViewnameandsurname,textVieworder;
     String k="";
     Intent intent;
     SharedPreferences sharedPreferences;
@@ -59,6 +60,7 @@ public class FragmentProfile extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         textViewsignout = v.findViewById(R.id.profileitem9);
         textViewnameandsurname = v.findViewById(R.id.text);
+        textVieworder = v.findViewById(R.id.profileitemorder);
 
         textViewnameandsurname.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +103,13 @@ public class FragmentProfile extends Fragment {
                 alertDialog.show();
 
 
+            }
+        });
+        textVieworder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(getContext(), UserOrder.class);
+                startActivity(intent1);
             }
         });
         
