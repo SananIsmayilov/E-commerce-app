@@ -2,6 +2,7 @@ package com.example.sananismayilov.myprojectsale.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -31,6 +33,7 @@ import com.example.sananismayilov.myprojectsale.Adapters.Adapter1;
 import com.example.sananismayilov.myprojectsale.Adapters.Conteyner;
 import com.example.sananismayilov.myprojectsale.HttpsTrustManager;
 import com.example.sananismayilov.myprojectsale.R;
+import com.example.sananismayilov.myprojectsale.İntentAcivity.Notification;
 
 import org.json.JSONArray;
 import org.json.JSONException;

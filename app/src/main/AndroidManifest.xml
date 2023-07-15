@@ -16,6 +16,9 @@
         android:theme="@style/Theme.MyProjectSale"
         tools:targetApi="31">
         <activity
+            android:name=".İntentAcivity.Notification"
+            android:exported="false" />
+        <activity
             android:name=".İntentAcivity.UserOrder"
             android:exported="false" />
         <activity

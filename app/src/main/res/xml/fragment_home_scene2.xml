@@ -21,11 +21,11 @@
             android:layout_marginStart="5dp"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="60dp"
             android:visibility="invisible" />
         <Constraint
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="200dp"
             motion:layout_constraintBottom_toTopOf="@+id/recyc1"
             motion:layout_constraintLeft_toLeftOf="parent"
             motion:layout_constraintRight_toRightOf="parent"
@@ -75,5 +75,13 @@
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
             android:visibility="visible" />
+        <Constraint
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            motion:layout_constraintRight_toRightOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/buttonnotification"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp" />
     </ConstraintSet>
 </MotionScene>
