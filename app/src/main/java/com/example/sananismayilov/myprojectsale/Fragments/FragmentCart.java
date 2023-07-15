@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.sananismayilov.myprojectsale.Adapters.Adapter2;
 import com.example.sananismayilov.myprojectsale.Adapters.AdapterToCartFragment;
 import com.example.sananismayilov.myprojectsale.Adapters.Conteyner1;
 import com.example.sananismayilov.myprojectsale.Adapters.ConteynerToFragmentCart;
