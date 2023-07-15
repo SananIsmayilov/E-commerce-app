@@ -7,10 +7,10 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:backgroundTint="#feefea"
+        android:backgroundTint="#F8F9FA"
         android:layout_height="match_parent"
         app:cardCornerRadius="10dp"
-        android:layout_margin="5dp"
+        android:layout_margin="4dp"
         android:id="@+id/cardView1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
