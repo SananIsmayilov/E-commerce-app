@@ -6,10 +6,11 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000">
+        motion:duration="2000">
        <KeyFrameSet>
        </KeyFrameSet>
         <OnSwipe motion:touchAnchorId="@+id/recyc1" />
+        <OnClick motion:targetId="@+id/recyc1" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
