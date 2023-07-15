@@ -3,5 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="ColorOnPrimary">#317ac7</color>
+    <color name="statusbarcolor">#ca432f</color>
 
 </resources>

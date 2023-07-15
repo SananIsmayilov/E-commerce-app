@@ -2,10 +2,12 @@ package com.example.sananismayilov.myprojectsale.İntentAcivity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -37,6 +39,8 @@ public class CatalogDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog_details);
+
+        getWindow().setStatusBarColor(ContextCompat.getColor(CatalogDetails.this,R.color.statusbarcolor));
         Intent intent = getIntent();
         String k = intent.getStringExtra("sentCatalog");
 

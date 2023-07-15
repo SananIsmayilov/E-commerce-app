@@ -30,7 +30,7 @@ ArrayList<ConteynerToCatalogDetails> catalogDetails;
     public void onBindViewHolder(@NonNull CatalogDetailsHolder holder, int position) {
         holder.binding.catalogdetailsactivityname.setText(catalogDetails.get(position).getName());
         holder.binding.catalogdetailsactivitymodel.setText(catalogDetails.get(position).getModel());
-        holder.binding.catalogdetailsactivityqiymet.setText(catalogDetails.get(position).getPrice());
+        holder.binding.catalogdetailsactivityqiymet.setText(catalogDetails.get(position).getPrice()+" AZN");
         Picasso.get().load(catalogDetails.get(position).getPicture()).into(holder.binding.catalogdetailsactivitypicture);
 
 
