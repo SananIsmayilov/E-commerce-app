@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#317ac7"
+    android:background="#ca432f"
     app:layoutDescription="@xml/fragment_home_scene3"
     tools:context=".Fragments.FragmentHome">
 
@@ -25,10 +25,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="160dp"
-        android:backgroundTint="#BD2727"
-        android:isScrollContainer="false"
-        android:progressBackgroundTint="#FFC107"
-        android:progressTint="#C81919"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

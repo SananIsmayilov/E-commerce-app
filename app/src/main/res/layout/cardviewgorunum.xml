@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:backgroundTint="#F8F9FA"
+        android:backgroundTint="#FFFFFF"
         android:layout_height="match_parent"
         app:cardCornerRadius="10dp"
         android:layout_margin="4dp"
@@ -44,7 +44,7 @@
                 android:layout_marginTop="20dp"
                 android:text="AD"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -74,7 +74,7 @@
                 android:paddingBottom="10dp"
                 android:text="Model"
                 android:textColor="@color/black"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -85,9 +85,9 @@
                 android:id="@+id/button"
                 android:layout_width="43dp"
                 android:layout_height="45dp"
-                android:layout_marginEnd="13dp"
-                android:backgroundTint="#F7F7F7"
+                android:layout_marginEnd="5dp"
                 android:background="@drawable/backforlike"
+                android:backgroundTint="#F7F7F7"
                 android:clickable="false"
                 app:layout_constraintEnd_toEndOf="@+id/imageviewcard"
                 app:layout_constraintTop_toTopOf="@+id/imageviewcard" />
