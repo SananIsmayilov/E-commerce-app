@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.sananismayilov.myprojectsale.HttpsTrustManager;
 import com.example.sananismayilov.myprojectsale.R;
 import com.example.sananismayilov.myprojectsale.İntentAcivity.CatalogDetails;
 
@@ -97,6 +98,8 @@ Animation animation,animation1;
                  }
                  progressBar.setAnimation(animation);
                  Collections.sort(CatalogArraylist);
+                 arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,CatalogArraylist);
+                 listView.setAdapter(arrayAdapter);
 
              } catch (JSONException e) {
                  throw new RuntimeException(e);
