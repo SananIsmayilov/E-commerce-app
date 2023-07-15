@@ -3,6 +3,7 @@ package com.example.sananismayilov.myprojectsale.Fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.PopupMenu;
@@ -60,7 +61,7 @@ public class FragmentHome extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = view.findViewById(R.id.recyc1);
         progressBar = view.findViewById(R.id.progressBar);
-        imageView = view.findViewById(R.id.imageView);
+
         animation = AnimationUtils.loadAnimation(getContext(),R.anim.animation);
         getData();
         // Inflate the layout for this fragment
@@ -96,6 +97,7 @@ public class FragmentHome extends Fragment  {
                         recyclerView.setHasFixedSize(true);
                         progressBar.setAnimation(animation);
                         recyclerView.setAdapter(adapter1);
+
                         adapter1.notifyDataSetChanged();
                     }
 
@@ -110,6 +112,7 @@ public class FragmentHome extends Fragment  {
                 System.out.println("errorerror " + error.toString());
                 Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
             }
+
         });
         Volley.newRequestQueue(getContext()).add(request);
 

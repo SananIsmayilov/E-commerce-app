@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:backgroundTint="#FBFBFB"
+        android:backgroundTint="#feefea"
         android:layout_height="match_parent"
         app:cardCornerRadius="10dp"
         android:layout_margin="5dp"
@@ -24,9 +24,9 @@
 
             <ImageView
                 android:id="@+id/imageviewcard"
-                android:layout_width="170dp"
-                android:layout_height="210dp"
-
+                android:layout_width="160dp"
+                android:layout_height="180dp"
+                android:scaleType="centerCrop"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:src="@drawable/saat"
@@ -39,6 +39,7 @@
             <TextView
                 android:id="@+id/textViewnamecard"
                 android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="AD"
