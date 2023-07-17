@@ -4,11 +4,14 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sananismayilov.myprojectsale.databinding.ViewforordersBinding;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -30,6 +33,8 @@ public class AdapterToOrders extends RecyclerView.Adapter<AdapterToOrders.Orders
     public void onBindViewHolder(@NonNull Ordersholder holder, int position) {
         holder.binding.ordertoname1.setText(orders.get(position).getProduct_name());
         holder.binding.ordertomodel1.setText(orders.get(position).getProduct_model());
+        Picasso.get().load(orders.get(position).getProduct_picture()).into(holder.binding.ordertoimage1);
+
         String status = orders.get(position).getStatus();
         if(status.equals("1")){
             holder.binding.ordertomodel1.setTextColor(Color.GREEN);
@@ -37,8 +42,8 @@ public class AdapterToOrders extends RecyclerView.Adapter<AdapterToOrders.Orders
         }else {
             holder.binding.ordertomodel1.setTextColor(Color.BLACK);
             holder.binding.ordertoname1.setTextColor(Color.BLACK);
-        }
-    }
+        }}
+
 
     @Override
     public int getItemCount() {

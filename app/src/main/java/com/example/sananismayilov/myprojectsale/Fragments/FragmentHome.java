@@ -81,6 +81,7 @@ public class FragmentHome extends Fragment  {
                 try {
                     JSONObject object1 = new JSONObject(response);
                     JSONArray jsonArray = object1.getJSONArray("Products");
+                    if(jsonArray.length() > 0){
                     for(int i=0;i< jsonArray.length();i++){
                         JSONObject object = jsonArray.getJSONObject(i);
                         String picture = object.getString("product_picture");
@@ -102,7 +103,7 @@ public class FragmentHome extends Fragment  {
                         recyclerView.setAdapter(adapter1);
 
                         adapter1.notifyDataSetChanged();
-                    }
+                    }}
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);

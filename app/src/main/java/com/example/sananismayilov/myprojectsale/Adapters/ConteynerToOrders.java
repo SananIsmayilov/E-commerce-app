@@ -4,11 +4,13 @@ public class ConteynerToOrders {
     private String product_name;
     private String product_model;
     private String status;
+    private  String product_picture;
 
-    public ConteynerToOrders(String product_name, String product_model, String status) {
+    public ConteynerToOrders(String product_name, String product_model, String status, String product_picture) {
         this.product_name = product_name;
         this.product_model = product_model;
         this.status = status;
+        this.product_picture = product_picture;
     }
 
     public String getProduct_name() {
@@ -33,5 +35,13 @@ public class ConteynerToOrders {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getProduct_picture() {
+        return product_picture;
+    }
+
+    public void setProduct_picture(String product_picture) {
+        this.product_picture = product_picture;
     }
 }

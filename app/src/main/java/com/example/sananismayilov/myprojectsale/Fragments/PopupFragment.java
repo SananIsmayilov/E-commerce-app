@@ -98,7 +98,7 @@ public class PopupFragment extends Fragment {
               preferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity",MODE_PRIVATE);
               String tokens = preferences.getString("user-token","");
               if(!tokens.equals("")){
-                insertorder(intent.getStringExtra("ad"), intent.getStringExtra("model"),tokens,i,v);}
+                insertorder(intent.getStringExtra("ad"), intent.getStringExtra("model"),tokens,i,v,intent.getStringExtra("sekil"));}
             }
         });
 
@@ -125,7 +125,7 @@ public class PopupFragment extends Fragment {
 
         return v ;
     }
-    public void insertorder(String name,String model,String token,int quantity,View v){
+    public void insertorder(String name,String model,String token,int quantity,View v,String picture){
         String url = "https://senan2.000webhostapp.com/SaleProject/ProductSaleProject/insertuserorder.php";
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -159,6 +159,7 @@ public class PopupFragment extends Fragment {
                 stringMap.put("product_model",model);
                 stringMap.put("status", String.valueOf(status));
                 stringMap.put("quantity",String.valueOf(quantity));
+                stringMap.put("product_picture",picture);
                 return stringMap;
             }
         };

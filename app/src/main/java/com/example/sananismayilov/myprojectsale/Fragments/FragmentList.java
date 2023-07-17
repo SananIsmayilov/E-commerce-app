@@ -38,11 +38,11 @@ import java.util.Collections;
 
 
 public class FragmentList extends Fragment {
-ArrayAdapter<String> arrayAdapter;
-ArrayList<String>CatalogArraylist;
-ListView listView;
-ProgressBar progressBar;
-Animation animation,animation1;
+    ArrayAdapter<String> arrayAdapter;
+    ArrayList<String> CatalogArraylist;
+    ListView listView;
+    ProgressBar progressBar;
+    Animation animation, animation1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,59 +59,61 @@ Animation animation,animation1;
 
         listView = view.findViewById(R.id.listview);
         progressBar = view.findViewById(R.id.progress);
-       animation =  AnimationUtils.loadAnimation(getContext(),R.anim.animation);
-       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               Intent intent = new Intent(view.getContext(), CatalogDetails.class);
-               intent.putExtra("sentCatalog", CatalogArraylist.get(position));
-               startActivity(intent);
-           }
-       });
+        animation = AnimationUtils.loadAnimation(getContext(), R.anim.animation);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(view.getContext(), CatalogDetails.class);
+                intent.putExtra("sentCatalog", CatalogArraylist.get(position));
+                startActivity(intent);
+            }
+        });
         getData();
         return view;
 
     }
 
-    public void getData(){
+    public void getData() {
         CatalogArraylist = new ArrayList<>();
         String url = "https://senan2.000webhostapp.com/SaleProject/ProductSaleProject/getAllData.php";
-     StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-         @Override
-         public void onResponse(String response) {
-             try {
-                JSONObject object = new JSONObject(response);
-                JSONArray array = object.getJSONArray("Products");
-                 for(int i=0;i<array.length();i++){
-                     boolean b =false;
-                     JSONObject jsonObject = array.getJSONObject(i);
-                     String k = jsonObject.getString("product_name");
-                     for(String f : CatalogArraylist){
-                         if(f.equals(k)){
-                             b= true;
-                         }
-                     }
-                     if(!b){
-                         CatalogArraylist.add(k);
-                     }
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject object = new JSONObject(response);
+                    JSONArray array = object.getJSONArray("Products");
+                    if (array.length() > 0) {
+                        for (int i = 0; i < array.length(); i++) {
+                            boolean b = false;
+                            JSONObject jsonObject = array.getJSONObject(i);
+                            String k = jsonObject.getString("product_name");
+                            for (String f : CatalogArraylist) {
+                                if (f.equals(k)) {
+                                    b = true;
+                                }
+                            }
+                            if (!b) {
+                                CatalogArraylist.add(k);
+                            }
 
-                 }
-                 progressBar.setAnimation(animation);
-                 Collections.sort(CatalogArraylist);
-                 arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,CatalogArraylist);
-                 listView.setAdapter(arrayAdapter);
+                        }
+                        progressBar.setAnimation(animation);
+                        Collections.sort(CatalogArraylist);
+                        arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, CatalogArraylist);
+                        listView.setAdapter(arrayAdapter);
+                    }
 
-             } catch (JSONException e) {
-                 throw new RuntimeException(e);
-             }
-         }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
 
-     }, new Response.ErrorListener() {
-         @Override
-         public void onErrorResponse(VolleyError error) {
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
-         }
-     });
+            }
+        });
         Volley.newRequestQueue(getContext()).add(request);
 
     }
