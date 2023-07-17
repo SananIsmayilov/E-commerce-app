@@ -32,7 +32,7 @@ ArrayList <ConteynerToFragmentCart> conteynerToFragmentCarts;
         if(conteynerToFragmentCarts.size()  >0 ){
         holder.binding.cartfragmentname.setText(conteynerToFragmentCarts.get(position).getNametofragmentcart());
         holder.binding.cartfragmentmodel.setText(conteynerToFragmentCarts.get(position).getModeltofragmentcart());
-        holder.binding.cartfragmentqiymet.setText(conteynerToFragmentCarts.get(position).getPricetofragmentcart());
+        holder.binding.cartfragmentqiymet.setText(conteynerToFragmentCarts.get(position).getPricetofragmentcart()+" AZN");
         Picasso.get().load(conteynerToFragmentCarts.get(position).getPicturetofragmentcart()).into(holder.binding.cartfragmentpicture);
     }
 
