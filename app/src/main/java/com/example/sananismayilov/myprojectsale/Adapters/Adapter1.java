@@ -92,14 +92,14 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.viewholder> {
 
                     Snackbar.make(v, "Məhsul seçildi!", Snackbar.LENGTH_SHORT)
                             .setTextColor(Color.WHITE)
-                            .setBackgroundTint(Color.parseColor("#317ac7"))
+                            .setBackgroundTint(Color.parseColor("#ca432f"))
                             .setAction("Səbətə daxil olun", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     Navigation.findNavController(holder.binding.imageviewcard).navigate(R.id.fragmentCart);
                                 }
                             })
-                            .setActionTextColor(Color.RED)
+                            .setActionTextColor(Color.WHITE)
                             .show();
 
                     b = true;
@@ -116,7 +116,7 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.viewholder> {
 
                     Snackbar.make(v, "Seçdiyiniz məhsul seçilmiş məhsulların siyahısından çıxarıldı", Snackbar.LENGTH_SHORT)
                             .setTextColor(Color.WHITE)
-                            .setBackgroundTint(Color.parseColor("#317ac7"))
+                            .setBackgroundTint(Color.parseColor("#ca432f"))
                             .show();
 
                     b = false;

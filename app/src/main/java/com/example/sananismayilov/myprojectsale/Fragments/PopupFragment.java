@@ -136,7 +136,7 @@ public class PopupFragment extends Fragment {
                     if(code == 1){
                     Snackbar.make(v,"Sifarişiniz əlavə edildi , təsdiq etmək üçün sifarişlərim bölməsinə daxil olun",Snackbar.LENGTH_SHORT)
                             .setTextColor(Color.WHITE)
-                            .setBackgroundTint(Color.parseColor("#317ac7"))
+                            .setBackgroundTint(Color.parseColor("#e17874"))
                             .show();}
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
