@@ -33,7 +33,6 @@ import com.example.sananismayilov.myprojectsale.Adapters.Adapter1;
 import com.example.sananismayilov.myprojectsale.Adapters.Conteyner;
 import com.example.sananismayilov.myprojectsale.HttpsTrustManager;
 import com.example.sananismayilov.myprojectsale.R;
-import com.example.sananismayilov.myprojectsale.İntentAcivity.Notification;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,9 +41,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class FragmentHome extends Fragment  {
- ArrayList<Conteyner> arrayList;
-    Adapter1 adapter1 ;
+public class FragmentHome extends Fragment {
+    ArrayList<Conteyner> arrayList;
+    Adapter1 adapter1;
     RecyclerView recyclerView;
     ProgressBar progressBar;
     Animation animation;
@@ -65,12 +64,13 @@ public class FragmentHome extends Fragment  {
         recyclerView = view.findViewById(R.id.recyc1);
         progressBar = view.findViewById(R.id.progressBar);
 
-        animation = AnimationUtils.loadAnimation(getContext(),R.anim.animation);
+        animation = AnimationUtils.loadAnimation(getContext(), R.anim.animation);
         getData();
         // Inflate the layout for this fragment
-        return view ;
+        return view;
     }
-    public void getData(){
+
+    public void getData() {
         arrayList = new ArrayList<>();
         HttpsTrustManager.allowAllSSL();
         String url = "https://senan2.000webhostapp.com/SaleProject/ProductSaleProject/getAllData.php";
@@ -81,29 +81,30 @@ public class FragmentHome extends Fragment  {
                 try {
                     JSONObject object1 = new JSONObject(response);
                     JSONArray jsonArray = object1.getJSONArray("Products");
-                    if(jsonArray.length() > 0){
-                    for(int i=0;i< jsonArray.length();i++){
-                        JSONObject object = jsonArray.getJSONObject(i);
-                        String picture = object.getString("product_picture");
-                        String name = object.getString("product_name");
-                        String qiymet = object.getString("product_price");
-                        String model = object.getString("product_model");
-                        int id = object.getInt("product_id");
-                        Conteyner conteyner = new Conteyner(picture,name,model,qiymet,id);
-                        arrayList.add(conteyner);
-                    }
-                    if(arrayList.size()==0){
-                        progressBar.setVisibility(View.INVISIBLE);
-                        imageView.setVisibility(View.VISIBLE);
-                    }else{
-                        Adapter1 adapter1 = new Adapter1(arrayList);
-                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-                        recyclerView.setHasFixedSize(true);
-                        progressBar.setAnimation(animation);
-                        recyclerView.setAdapter(adapter1);
+                    if (jsonArray.length() > 0) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject object = jsonArray.getJSONObject(i);
+                            String picture = object.getString("product_picture");
+                            String name = object.getString("product_name");
+                            String qiymet = object.getString("product_price");
+                            String model = object.getString("product_model");
+                            int id = object.getInt("product_id");
+                            Conteyner conteyner = new Conteyner(picture, name, model, qiymet, id);
+                            arrayList.add(conteyner);
+                        }
+                        if (arrayList.size() == 0) {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            imageView.setVisibility(View.VISIBLE);
+                        } else {
+                            Adapter1 adapter1 = new Adapter1(arrayList);
+                            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+                            recyclerView.setHasFixedSize(true);
+                            progressBar.setAnimation(animation);
+                            recyclerView.setAdapter(adapter1);
 
-                        adapter1.notifyDataSetChanged();
-                    }}
+                            adapter1.notifyDataSetChanged();
+                        }
+                    }
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
@@ -121,8 +122,6 @@ public class FragmentHome extends Fragment  {
         Volley.newRequestQueue(getContext()).add(request);
 
     }
-
-
 
 
 }
