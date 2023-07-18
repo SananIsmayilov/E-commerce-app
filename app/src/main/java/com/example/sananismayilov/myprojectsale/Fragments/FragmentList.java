@@ -42,7 +42,6 @@ public class FragmentList extends Fragment {
     ArrayList<String> CatalogArraylist;
     ListView listView;
     ProgressBar progressBar;
-    Animation animation, animation1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +58,6 @@ public class FragmentList extends Fragment {
 
         listView = view.findViewById(R.id.listview);
         progressBar = view.findViewById(R.id.progress);
-        animation = AnimationUtils.loadAnimation(getContext(), R.anim.animation);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -95,13 +93,12 @@ public class FragmentList extends Fragment {
                             if (!b) {
                                 CatalogArraylist.add(k);
                             }
-
                         }
-                        progressBar.setAnimation(animation);
-                        Collections.sort(CatalogArraylist);
-                        arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, CatalogArraylist);
-                        listView.setAdapter(arrayAdapter);
                     }
+                    progressBar.setVisibility(View.INVISIBLE);
+                    Collections.sort(CatalogArraylist);
+                    arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, CatalogArraylist);
+                    listView.setAdapter(arrayAdapter);
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
