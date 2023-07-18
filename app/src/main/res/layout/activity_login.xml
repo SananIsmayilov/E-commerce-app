@@ -52,6 +52,7 @@
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/backforedittext"
                     android:hint="Parol"
+                    android:inputType="textPassword"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:background="@drawable/backforbutton"
-            android:backgroundTint="#6d77fb"
+            android:backgroundTint="#e17874"
             android:onClick="loginbtn"
             android:padding="5dp"
             android:text="Daxil ol"
