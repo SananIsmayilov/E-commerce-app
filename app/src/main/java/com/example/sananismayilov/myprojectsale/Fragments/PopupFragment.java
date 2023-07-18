@@ -41,9 +41,9 @@ import java.util.Map;
 
 
 public class PopupFragment extends Fragment {
-    TextView textViewad,textViewmodel,textViewsale,textViewquantity;
+    TextView textViewad, textViewmodel, textViewsale, textViewquantity;
     ImageView imageView;
-    Button button,btnplus,btnminus;
+    Button button, btnplus, btnminus;
     Animation animation;
     Intent intent;
     ProgressBar progressBar;
@@ -69,7 +69,7 @@ public class PopupFragment extends Fragment {
         textViewsale = v.findViewById(R.id.detailssale);
         imageView = v.findViewById(R.id.imageView2);
         button = v.findViewById(R.id.buttonorder);
-        animation = AnimationUtils.loadAnimation(getContext(),R.anim.animation2);
+        animation = AnimationUtils.loadAnimation(getContext(), R.anim.animation2);
         progressBar = v.findViewById(R.id.progressbar1);
         btnminus = v.findViewById(R.id.orderminus);
         btnplus = v.findViewById(R.id.orderplus);
@@ -78,12 +78,12 @@ public class PopupFragment extends Fragment {
 
         textViewad.setText(intent.getStringExtra("ad"));
         textViewmodel.setText(intent.getStringExtra("model"));
-        textViewsale.setText(intent.getStringExtra("qiymet")+ " AZN");
+        textViewsale.setText(intent.getStringExtra("qiymet") + " AZN");
         button.setAnimation(animation);
         Picasso.get().load(intent.getStringExtra("sekil")).into(imageView, new Callback() {
             @Override
             public void onSuccess() {
-              progressBar.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -95,10 +95,11 @@ public class PopupFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              preferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity",MODE_PRIVATE);
-              String tokens = preferences.getString("user-token","");
-              if(!tokens.equals("")){
-                insertorder(intent.getStringExtra("ad"), intent.getStringExtra("model"),tokens,i,v,intent.getStringExtra("sekil"));}
+                preferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity", MODE_PRIVATE);
+                String tokens = preferences.getString("user-token", "");
+                if (!tokens.equals("")) {
+                    insertorder(intent.getStringExtra("ad"), intent.getStringExtra("model"), tokens, i, v, intent.getStringExtra("sekil"));
+                }
             }
         });
 
@@ -112,10 +113,10 @@ public class PopupFragment extends Fragment {
         btnminus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(i>1){
+                if (i > 1) {
                     i--;
-                }else {
-                  i=1;
+                } else {
+                    i = 1;
                 }
 
                 textViewquantity.setText(String.valueOf(i));
@@ -123,9 +124,10 @@ public class PopupFragment extends Fragment {
         });
 
 
-        return v ;
+        return v;
     }
-    public void insertorder(String name,String model,String token,int quantity,View v,String picture){
+
+    public void insertorder(String name, String model, String token, int quantity, View v, String picture) {
         String url = "https://senan2.000webhostapp.com/SaleProject/ProductSaleProject/insertuserorder.php";
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -133,11 +135,12 @@ public class PopupFragment extends Fragment {
                 try {
                     JSONObject object = new JSONObject(response);
                     int code = object.getInt("Code");
-                    if(code == 1){
-                    Snackbar.make(v,"Sifarişiniz əlavə edildi , təsdiq etmək üçün sifarişlərim bölməsinə daxil olun",Snackbar.LENGTH_SHORT)
-                            .setTextColor(Color.WHITE)
-                            .setBackgroundTint(Color.parseColor("#e17874"))
-                            .show();}
+                    if (code == 1) {
+                        Snackbar.make(v, "Sifarişiniz əlavə edildi , təsdiq etmək üçün sifarişlərim bölməsinə daxil olun", Snackbar.LENGTH_SHORT)
+                                .setTextColor(Color.WHITE)
+                                .setBackgroundTint(Color.parseColor("#e17874"))
+                                .show();
+                    }
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -148,18 +151,18 @@ public class PopupFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
             }
-        }){
+        }) {
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 int status = 0;
-                Map<String,String> stringMap = new HashMap<>();
-                stringMap.put("user_token",token);
-                stringMap.put("product_name",name);
-                stringMap.put("product_model",model);
+                Map<String, String> stringMap = new HashMap<>();
+                stringMap.put("user_token", token);
+                stringMap.put("product_name", name);
+                stringMap.put("product_model", model);
                 stringMap.put("status", String.valueOf(status));
-                stringMap.put("quantity",String.valueOf(quantity));
-                stringMap.put("product_picture",picture);
+                stringMap.put("quantity", String.valueOf(quantity));
+                stringMap.put("product_picture", picture);
                 return stringMap;
             }
         };
