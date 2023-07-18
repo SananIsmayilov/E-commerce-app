@@ -31,6 +31,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sananismayilov.myprojectsale.R;
 import com.example.sananismayilov.myprojectsale.İntentAcivity.LoginandregisterActivity;
+import com.example.sananismayilov.myprojectsale.İntentAcivity.ProfileOtherItem;
 import com.example.sananismayilov.myprojectsale.İntentAcivity.User;
 import com.example.sananismayilov.myprojectsale.İntentAcivity.UserOrder;
 
@@ -45,7 +46,7 @@ import java.util.Map;
 
 
 public class FragmentProfile extends Fragment {
-    TextView textViewsignout, textViewnameandsurname, textVieworder, textViewinstagram;
+    TextView textViewsignout, textViewnameandsurname, textVieworder, textViewinstagram,textViewkampaniya,textViewmaqaza,textViewodenis,textViewdestek,textViewinfo;
     String k = "";
     Intent intent;
     SharedPreferences sharedPreferences;
@@ -65,7 +66,11 @@ public class FragmentProfile extends Fragment {
         textViewnameandsurname = v.findViewById(R.id.text);
         textVieworder = v.findViewById(R.id.profileitemorder);
         textViewinstagram = v.findViewById(R.id.profileitem4);
-
+        textViewkampaniya = v.findViewById(R.id.profileitem1);
+        textViewmaqaza = v.findViewById(R.id.profileitem2);
+        textViewodenis = v.findViewById(R.id.profileitem3);
+        textViewdestek = v.findViewById(R.id.profileitem5);
+        textViewinfo = v.findViewById(R.id.profileitem6);
         textViewnameandsurname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,7 +128,14 @@ public class FragmentProfile extends Fragment {
                 gottolink("https://www.instagram.com/_i.sanan_");
             }
         });
-
+        textViewinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(getContext(), ProfileOtherItem.class);
+                intent1.putExtra("selecteditem","info");
+                startActivity(intent1);
+            }
+        });
 
         getuserData();
         return v;
@@ -179,4 +191,5 @@ public class FragmentProfile extends Fragment {
         startActivity(intent1);
 
     }
+
 }
