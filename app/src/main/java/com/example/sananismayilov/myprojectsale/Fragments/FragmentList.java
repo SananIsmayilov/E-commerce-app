@@ -45,7 +45,6 @@ public class FragmentList extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
     }
@@ -55,7 +54,6 @@ public class FragmentList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
-
         listView = view.findViewById(R.id.listview);
         progressBar = view.findViewById(R.id.progress);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -80,24 +78,22 @@ public class FragmentList extends Fragment {
                 try {
                     JSONObject object = new JSONObject(response);
                     JSONArray array = object.getJSONArray("Products");
-                    if (array.length() > 0) {
-                        for (int i = 0; i < array.length(); i++) {
-                            boolean b = false;
-                            JSONObject jsonObject = array.getJSONObject(i);
-                            String k = jsonObject.getString("product_name");
-                            for (String f : CatalogArraylist) {
-                                if (f.equals(k)) {
-                                    b = true;
-                                }
-                            }
-                            if (!b) {
-                                CatalogArraylist.add(k);
+                    for (int i = 0; i < array.length(); i++) {
+                        boolean b = false;
+                        JSONObject jsonObject = array.getJSONObject(i);
+                        String k = jsonObject.getString("product_name");
+                        for (String f : CatalogArraylist) {
+                            if (f.equals(k)) {
+                                b = true;
                             }
                         }
+                        if (!b) {
+                            CatalogArraylist.add(k);
+                        }
                     }
-                    progressBar.setVisibility(View.INVISIBLE);
                     Collections.sort(CatalogArraylist);
                     arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, CatalogArraylist);
+                    progressBar.setVisibility(View.INVISIBLE);
                     listView.setAdapter(arrayAdapter);
 
                 } catch (JSONException e) {
