@@ -16,15 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyProjectSale"
         tools:targetApi="31">
-        <activity
-            android:name=".İntentAcivity.Detailorderclass"
-            android:exported="false" />
+
         <activity
             android:name=".İntentAcivity.ProfileOtherItem"
             android:exported="false" />
-        <activity
-            android:name=".İntentAcivity.Notification"
-            android:exported="false" />
+
         <activity
             android:name=".İntentAcivity.UserOrder"
             android:exported="false" />
@@ -51,6 +47,11 @@
             android:exported="false"
             android:theme="@style/customstyle" />
         <activity
+            android:name=".İntentAcivity.OrderDetailsClass"
+            android:exported="false"
+            android:theme="@style/customstyle" />
+
+        <activity
             android:name=".İntentAcivity.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -59,6 +60,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
     </application>
 
 </manifest>

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sananismayilov.myprojectsale.R;
 import com.example.sananismayilov.myprojectsale.databinding.ViewforordersBinding;
+import com.example.sananismayilov.myprojectsale.İntentAcivity.OrderDetailsClass;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -36,7 +37,6 @@ public class AdapterToOrders extends RecyclerView.Adapter<AdapterToOrders.Orders
         holder.binding.ordertoname1.setText(orders.get(position).getProduct_name());
         holder.binding.ordertomodel1.setText(orders.get(position).getProduct_model());
         Picasso.get().load(orders.get(position).getProduct_picture()).into(holder.binding.ordertoimage1);
-
         String status = orders.get(position).getStatus();
         if(status.equals("1")){
             holder.binding.ordercheck.setBackgroundResource(R.drawable.checked);
@@ -44,7 +44,12 @@ public class AdapterToOrders extends RecyclerView.Adapter<AdapterToOrders.Orders
             holder.binding.ordercheck.setBackgroundResource(R.drawable.check);
             holder.binding.ordertomodel1.setTextColor(Color.BLACK);
             holder.binding.ordertoname1.setTextColor(Color.BLACK);
-        }}
+        }else {
+            holder.binding.ordercheck.setBackgroundResource(R.drawable.wait);
+        }
+    
+    
+    }
 
 
 
