@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class LoginandregisterActivity extends AppCompatActivity {
-    private EditText eemail, ename, essurname, epassword;
+    private EditText eemail, ename, essurname, epassword,ephonenumber;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
@@ -44,6 +44,7 @@ public class LoginandregisterActivity extends AppCompatActivity {
         ename = findViewById(R.id.signname);
         epassword = findViewById(R.id.signpassword);
         essurname = findViewById(R.id.signsurname);
+        ephonenumber = findViewById(R.id.signphonenumber);
 
         sharedPreferences = this.getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity", MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -67,7 +68,8 @@ public class LoginandregisterActivity extends AppCompatActivity {
         String username = ename.getText().toString().trim();
         String usersurname = essurname.getText().toString().trim();
         String userpassword = epassword.getText().toString().trim();
-        if (!TextUtils.isEmpty(useremail) && !TextUtils.isEmpty(username) && !TextUtils.isEmpty(usersurname) && !TextUtils.isEmpty(userpassword)) {
+        String userphonenumber = ephonenumber.getText().toString().trim();
+        if (!TextUtils.isEmpty(useremail) && !TextUtils.isEmpty(username) && !TextUtils.isEmpty(usersurname) && !TextUtils.isEmpty(userpassword) && !TextUtils.isEmpty(userphonenumber)) {
             UUID uuid = UUID.randomUUID();
             String stringtoken = uuid.toString();
             String url = "https://senan2.000webhostapp.com/SaleProject/loginSaleProject/insertuserinformation.php";
@@ -96,6 +98,7 @@ public class LoginandregisterActivity extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                     editor.putString("user-token", "null");
                     editor.apply();
+                    Toast.makeText(LoginandregisterActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                 }
             }) {
                 @Nullable
@@ -107,6 +110,7 @@ public class LoginandregisterActivity extends AppCompatActivity {
                     params.put("name", username);
                     params.put("surname", usersurname);
                     params.put("token", stringtoken);
+                    params.put("phone_number",userphonenumber);
                     return params;
                 }
             };
@@ -124,6 +128,8 @@ public class LoginandregisterActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        editor.putString("user-token", "null");
+        editor.apply();
         android.os.Process.killProcess(android.os.Process.myPid());
         super.onBackPressed();
     }

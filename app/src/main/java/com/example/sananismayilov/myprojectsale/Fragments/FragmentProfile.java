@@ -172,7 +172,7 @@ public class FragmentProfile extends Fragment {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
+                    Toast.makeText(getContext(), "sss", Toast.LENGTH_SHORT).show();
                 }
             }) {
 

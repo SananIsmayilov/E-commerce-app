@@ -136,7 +136,7 @@ public class PopupFragment extends Fragment {
                     JSONObject object = new JSONObject(response);
                     int code = object.getInt("Code");
                     if (code == 1) {
-                        Snackbar.make(v, "Sifarişiniz əlavə edildi , təsdiq etmək üçün sifarişlərim bölməsinə daxil olun", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(v, "Sifarişiniz əlavə edildi , statusu izləmək üçün sifarişlərim bölməsinə daxil olun", Snackbar.LENGTH_SHORT)
                                 .setTextColor(Color.WHITE)
                                 .setBackgroundTint(Color.parseColor("#e17874"))
                                 .show();
