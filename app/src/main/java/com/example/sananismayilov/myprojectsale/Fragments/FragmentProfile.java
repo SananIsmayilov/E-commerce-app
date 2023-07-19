@@ -29,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.sananismayilov.myprojectsale.HttpsTrustManager;
 import com.example.sananismayilov.myprojectsale.R;
 import com.example.sananismayilov.myprojectsale.İntentAcivity.LoginandregisterActivity;
 import com.example.sananismayilov.myprojectsale.İntentAcivity.ProfileOtherItem;
@@ -143,6 +144,7 @@ public class FragmentProfile extends Fragment {
 
 
     public void getuserData() {
+        HttpsTrustManager.allowAllSSL();
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity", MODE_PRIVATE);
         String tokens = sharedPreferences.getString("user-token", "");
         if (!tokens.equals("")) {
