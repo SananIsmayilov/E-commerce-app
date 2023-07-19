@@ -2,10 +2,13 @@ package com.example.sananismayilov.myprojectsale.İntentAcivity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -18,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sananismayilov.myprojectsale.Adapters.AdapterToOrders;
 import com.example.sananismayilov.myprojectsale.Adapters.ConteynerToOrders;
+
 import com.example.sananismayilov.myprojectsale.R;
 
 import org.json.JSONArray;
@@ -39,7 +43,6 @@ SharedPreferences preferences;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_order);
         recyclerView = findViewById(R.id.recylerviewtoorders);
-
         getOrders();
 
     }

@@ -17,6 +17,9 @@
         android:theme="@style/Theme.MyProjectSale"
         tools:targetApi="31">
         <activity
+            android:name=".İntentAcivity.Detailorderclass"
+            android:exported="false" />
+        <activity
             android:name=".İntentAcivity.ProfileOtherItem"
             android:exported="false" />
         <activity

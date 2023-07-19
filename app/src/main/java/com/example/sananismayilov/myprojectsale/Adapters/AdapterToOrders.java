@@ -1,5 +1,6 @@
 package com.example.sananismayilov.myprojectsale.Adapters;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,7 @@ public class AdapterToOrders extends RecyclerView.Adapter<AdapterToOrders.Orders
             holder.binding.ordertomodel1.setTextColor(Color.BLACK);
             holder.binding.ordertoname1.setTextColor(Color.BLACK);
         }}
+
 
 
     @Override
