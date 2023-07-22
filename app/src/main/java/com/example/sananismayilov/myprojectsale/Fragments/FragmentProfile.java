@@ -99,6 +99,7 @@ public class FragmentProfile extends Fragment {
                         sharedPreferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("user-token", "null");
+                        editor.putBoolean("checkboxstatus",false);
                         editor.apply();
                         Intent intent1 = new Intent(getContext(), LoginandregisterActivity.class);
                         startActivity(intent1);
