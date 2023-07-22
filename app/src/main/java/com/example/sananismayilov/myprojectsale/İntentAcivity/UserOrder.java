@@ -46,11 +46,12 @@ public class UserOrder extends AppCompatActivity {
         recyclerView = findViewById(R.id.recylerviewtoorders);
         preferences = this.getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity", MODE_PRIVATE);
         statustocheckbox = preferences.getBoolean("checkboxstatus", false);
+        getOrders();
         if (!statustocheckbox) {
             Intent intent = new Intent(getApplicationContext(), OrderDetailsClass.class);
             startActivity(intent);
         }
-        getOrders();
+
 
     }
 

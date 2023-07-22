@@ -90,11 +90,12 @@ public class FragmentList extends Fragment {
                         if (!b) {
                             CatalogArraylist.add(k);
                         }
+                        Collections.sort(CatalogArraylist);
+                        arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, CatalogArraylist);
+                        progressBar.setVisibility(View.INVISIBLE);
+                        listView.setAdapter(arrayAdapter);
                     }
-                    Collections.sort(CatalogArraylist);
-                    arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, CatalogArraylist);
-                    progressBar.setVisibility(View.INVISIBLE);
-                    listView.setAdapter(arrayAdapter);
+
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
