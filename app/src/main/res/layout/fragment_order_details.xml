@@ -29,7 +29,7 @@
         android:buttonTint="#000000"
         android:text="Bir daha göstərmə"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="22sp"
         app:layout_constraintLeft_toLeftOf="@id/img1"
         app:layout_constraintTop_toBottomOf="@id/img1" />
 
