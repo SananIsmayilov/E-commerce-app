@@ -2,10 +2,17 @@ package com.example.sananismayilov.myprojectsale.İntentAcivity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -31,9 +38,10 @@ import java.util.Map;
 import java.util.UUID;
 
 public class LoginandregisterActivity extends AppCompatActivity {
-    private EditText eemail, ename, essurname, epassword,ephonenumber;
+    private EditText eemail, ename, essurname, epassword, ephonenumber;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    public NotificationCompat.Builder builder;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -83,7 +91,7 @@ public class LoginandregisterActivity extends AppCompatActivity {
                             editor.clear();
                             editor.putString("user-token", stringtoken);
                             editor.apply();
-                            Toast.makeText(LoginandregisterActivity.this, "Uğurla qeydiyyatdan keçdiniz", Toast.LENGTH_SHORT).show();
+                            shownotification(username);
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -110,7 +118,7 @@ public class LoginandregisterActivity extends AppCompatActivity {
                     params.put("name", username);
                     params.put("surname", usersurname);
                     params.put("token", stringtoken);
-                    params.put("phone_number",userphonenumber);
+                    params.put("phone_number", userphonenumber);
                     return params;
                 }
             };
@@ -132,5 +140,44 @@ public class LoginandregisterActivity extends AppCompatActivity {
         editor.apply();
         android.os.Process.killProcess(android.os.Process.myPid());
         super.onBackPressed();
+    }
+
+    public void shownotification(String name) {
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            String channelid = "channelid";
+            String channelname = "channelname";
+            String channeldescription = "channeldescription";
+            int channelimportantly = NotificationManager.IMPORTANCE_HIGH;
+
+            NotificationChannel channel = manager.getNotificationChannel(channelid);
+
+            if (channel == null) {
+                channel = new NotificationChannel(channelid, channelname, channelimportantly);
+                channel.setDescription(channeldescription);
+                manager.createNotificationChannel(channel);
+            }
+            builder = new NotificationCompat.Builder(this, channelid);
+            builder.setContentTitle("Hörmətli "+ name);
+            builder.setContentText("Tətbiqə xoş gəlmisiniz");
+            builder.setAutoCancel(true);
+            builder.setSmallIcon(R.drawable.icontontfc);
+            builder.setContentIntent(pendingIntent);
+
+        } else {
+            builder = new NotificationCompat.Builder(this);
+            builder.setContentTitle("Hörmətli "+ name);
+            builder.setContentText("Tətbiqə xoş gəlmisiniz");
+            builder.setAutoCancel(true);
+            builder.setSmallIcon(R.drawable.icontontfc);
+            builder.setPriority(Notification.PRIORITY_HIGH);
+            builder.setContentIntent(pendingIntent);
+        }
+        manager.notify(1, builder.build());
     }
 }
