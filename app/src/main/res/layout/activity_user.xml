@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <EditText
                 android:id="@+id/usermail"
                 android:layout_width="350dp"
                 android:padding="10dp"
@@ -32,7 +32,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/backforedittext"
-                android:text="email"
+                android:text="Email"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
+            <EditText
                 android:id="@+id/username"
                 android:layout_width="350dp"
                 android:textColor="@color/black"
@@ -56,7 +56,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/usermail" />
 
-            <TextView
+            <EditText
                 android:id="@+id/usersurname"
                 android:layout_width="350dp"
                 android:textColor="@color/black"
@@ -73,7 +73,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/username" />
 
-            <TextView
+            <EditText
                 android:id="@+id/userpassword"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
@@ -91,6 +91,21 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/buttonupdate"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#e17874"
+        android:textColor="@color/white"
+        android:text="Dəyiş"
+        android:textSize="24sp"
+        android:textAllCaps="false"
+        android:background="@drawable/backforbutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

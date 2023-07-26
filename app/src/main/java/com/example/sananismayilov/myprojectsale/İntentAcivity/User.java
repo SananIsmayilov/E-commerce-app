@@ -28,6 +28,7 @@ import java.util.Map;
 public class User extends AppCompatActivity {
     Intent intent;
     ActivityUserBinding binding;
+    String tokens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +36,18 @@ public class User extends AppCompatActivity {
         binding = ActivityUserBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
         intent = getIntent();
-        getuserData();
+        tokens = intent.getStringExtra("token");
+        getuserData(tokens);
+
+        binding.buttonupdate.setOnClickListener(view -> {
+            updateuser();
+        });
 
     }
 
 
-    public void getuserData() {
-        String tokens = intent.getStringExtra("token");
+    public void getuserData(String tokens) {
+
         if (!tokens.equals("")) {
             String url = "https://senan2.000webhostapp.com/SaleProject/loginSaleProject/getUser.php";
             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -81,6 +87,45 @@ public class User extends AppCompatActivity {
             Volley.newRequestQueue(this).add(request);
         }
 
+
+    }
+
+    public void updateuser() {
+        String url = "https://senan2.000webhostapp.com/SaleProject/ProductSaleProject/updateuser.php";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject object = new JSONObject(response);
+                    int code = object.getInt("Code");
+                    if(code == 1){
+                        Toast.makeText(User.this, "Məlumatlarınız uğurla dəyişdi", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put("email",binding.usermail.getText().toString());
+                map.put("password",binding.userpassword.getText().toString());
+                map.put("name",binding.username.getText().toString());
+                map.put("surname",binding.usersurname.getText().toString());
+                map.put("token",tokens);
+
+                return map;
+            }
+        };
+        Volley.newRequestQueue(this).add(request);
 
     }
 }
