@@ -26,8 +26,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class User extends AppCompatActivity {
-Intent intent;
-ActivityUserBinding binding;
+    Intent intent;
+    ActivityUserBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +40,9 @@ ActivityUserBinding binding;
     }
 
 
-
-    public void getuserData(){
+    public void getuserData() {
         String tokens = intent.getStringExtra("token");
-        if(!tokens.equals("")){
+        if (!tokens.equals("")) {
             String url = "https://senan2.000webhostapp.com/SaleProject/loginSaleProject/getUser.php";
             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
@@ -50,14 +50,13 @@ ActivityUserBinding binding;
                     try {
                         JSONObject object = new JSONObject(response);
                         JSONArray array = object.getJSONArray("User");
-                        for (int i = 0;i<array.length();i++){
+                        for (int i = 0; i < array.length(); i++) {
                             JSONObject jsonObject = array.getJSONObject(i);
                             binding.username.setText(jsonObject.getString("name"));
                             binding.usersurname.setText(jsonObject.getString("surname"));
                             binding.usermail.setText(jsonObject.getString("email"));
                             binding.userpassword.setText(jsonObject.getString("password"));
                         }
-
 
 
                     } catch (JSONException e) {
@@ -69,19 +68,18 @@ ActivityUserBinding binding;
                 public void onErrorResponse(VolleyError error) {
 
                 }
-            }){
+            }) {
 
                 @Nullable
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String,String> map = new HashMap<>();
-                    map.put("token",tokens);
+                    Map<String, String> map = new HashMap<>();
+                    map.put("token", tokens);
                     return map;
                 }
             };
             Volley.newRequestQueue(this).add(request);
         }
-
 
 
     }

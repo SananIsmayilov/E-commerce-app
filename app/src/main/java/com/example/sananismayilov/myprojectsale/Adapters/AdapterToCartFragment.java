@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class AdapterToCartFragment extends RecyclerView.Adapter<AdapterToCartFragment.CartFragmentHolder> {
-ArrayList <ConteynerToFragmentCart> conteynerToFragmentCarts;
+    ArrayList<ConteynerToFragmentCart> conteynerToFragmentCarts;
 
     public AdapterToCartFragment(ArrayList<ConteynerToFragmentCart> conteynerToFragmentCarts) {
         this.conteynerToFragmentCarts = conteynerToFragmentCarts;
@@ -23,18 +23,18 @@ ArrayList <ConteynerToFragmentCart> conteynerToFragmentCarts;
     @NonNull
     @Override
     public CartFragmentHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ViewforcartfragmentBinding binding = ViewforcartfragmentBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        ViewforcartfragmentBinding binding = ViewforcartfragmentBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new CartFragmentHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CartFragmentHolder holder, int position) {
-        if(conteynerToFragmentCarts.size()  >0 ){
-        holder.binding.cartfragmentname.setText(conteynerToFragmentCarts.get(position).getNametofragmentcart());
-        holder.binding.cartfragmentmodel.setText(conteynerToFragmentCarts.get(position).getModeltofragmentcart());
-        holder.binding.cartfragmentqiymet.setText(conteynerToFragmentCarts.get(position).getPricetofragmentcart()+" AZN");
-        Picasso.get().load(conteynerToFragmentCarts.get(position).getPicturetofragmentcart()).into(holder.binding.cartfragmentpicture);
-    }
+        if (conteynerToFragmentCarts.size() > 0) {
+            holder.binding.cartfragmentname.setText(conteynerToFragmentCarts.get(position).getNametofragmentcart());
+            holder.binding.cartfragmentmodel.setText(conteynerToFragmentCarts.get(position).getModeltofragmentcart());
+            holder.binding.cartfragmentqiymet.setText(conteynerToFragmentCarts.get(position).getPricetofragmentcart() + " AZN");
+            Picasso.get().load(conteynerToFragmentCarts.get(position).getPicturetofragmentcart()).into(holder.binding.cartfragmentpicture);
+        }
 
 
     }
@@ -44,7 +44,7 @@ ArrayList <ConteynerToFragmentCart> conteynerToFragmentCarts;
         return conteynerToFragmentCarts.size();
     }
 
-    public class CartFragmentHolder extends RecyclerView.ViewHolder{
+    public class CartFragmentHolder extends RecyclerView.ViewHolder {
         ViewforcartfragmentBinding binding;
 
         public CartFragmentHolder(@NonNull ViewforcartfragmentBinding binding) {

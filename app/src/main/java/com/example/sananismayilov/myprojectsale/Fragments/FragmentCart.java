@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.sananismayilov.myprojectsale.Adapters.AdapterToCartFragment;
@@ -29,6 +30,7 @@ public class FragmentCart extends Fragment {
     SQLiteDatabase sqLiteDatabase;
     ArrayList<ConteynerToFragmentCart> conteynerToFragmentCartArrayList;
     AdapterToCartFragment adapterToCartFragment;
+    ImageView imageView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class FragmentCart extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
 
         recyclerView = view.findViewById(R.id.recylerviewcart);
-
+        imageView = view.findViewById(R.id.imageView3);
 
         getSelectedProducts();
         return view;
@@ -67,7 +69,9 @@ public class FragmentCart extends Fragment {
             conteynerToFragmentCartArrayList.add(conteynerToFragmentCart);
         }
         cursor.close();
-
+        if (conteynerToFragmentCartArrayList.size() == 0){
+            imageView.setVisibility(View.VISIBLE);
+        }
         adapterToCartFragment = new AdapterToCartFragment(conteynerToFragmentCartArrayList);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recyclerView.setAdapter(adapterToCartFragment);

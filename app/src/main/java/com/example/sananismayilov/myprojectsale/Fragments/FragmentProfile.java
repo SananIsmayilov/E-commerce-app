@@ -47,7 +47,7 @@ import java.util.Map;
 
 
 public class FragmentProfile extends Fragment {
-    TextView textViewsignout, textViewnameandsurname, textVieworder, textViewinstagram,textViewkampaniya,textViewmaqaza,textViewodenis,textViewdestek,textViewinfo;
+    TextView textViewsignout, textViewnameandsurname, textVieworder, textViewinstagram, textViewkampaniya, textViewmaqaza, textViewodenis, textViewdestek, textViewinfo;
     String k = "";
     Intent intent;
     SharedPreferences sharedPreferences;
@@ -98,8 +98,8 @@ public class FragmentProfile extends Fragment {
                         database.execSQL("DELETE FROM selectedproducts");
                         sharedPreferences = getContext().getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("user-token","null").apply();
-                        editor.putBoolean("checkboxstatus",false);
+                        editor.putString("user-token", "null").apply();
+                        editor.putBoolean("checkboxstatus", false);
                         Intent intent1 = new Intent(getContext(), LoginandregisterActivity.class);
                         startActivity(intent1);
                     }
@@ -133,7 +133,7 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(getContext(), ProfileOtherItem.class);
-                intent1.putExtra("selecteditem","info");
+                intent1.putExtra("selecteditem", "info");
                 startActivity(intent1);
             }
         });
@@ -187,7 +187,8 @@ public class FragmentProfile extends Fragment {
             Volley.newRequestQueue(getContext()).add(request);
         }
     }
-    public  void gottolink(String link){
+
+    public void gottolink(String link) {
         Intent intent1 = new Intent(Intent.ACTION_VIEW);
         intent1.setData(Uri.parse(link));
         startActivity(intent1);
