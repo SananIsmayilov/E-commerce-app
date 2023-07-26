@@ -2,8 +2,11 @@ package com.example.sananismayilov.myprojectsale.İntentAcivity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -12,12 +15,14 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -39,9 +44,10 @@ import java.util.UUID;
 
 public class LoginandregisterActivity extends AppCompatActivity {
     private EditText eemail, ename, essurname, epassword, ephonenumber;
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     public NotificationCompat.Builder builder;
+    Button button;
+    private ProgressBar progressBar;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -53,20 +59,28 @@ public class LoginandregisterActivity extends AppCompatActivity {
         epassword = findViewById(R.id.signpassword);
         essurname = findViewById(R.id.signsurname);
         ephonenumber = findViewById(R.id.signphonenumber);
-
-        sharedPreferences = this.getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        String tokens_sharedPreferences = sharedPreferences.getString("user-token", "null");
-
-        if (!tokens_sharedPreferences.equals("null")) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-            finish();
+        button = findViewById(R.id.signbtn);
+        progressBar = findViewById(R.id.progressBar2);
+        try {
+           SharedPreferences sharedPreferences = this.getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity", MODE_PRIVATE);
+           editor = sharedPreferences.edit();
+            String tokens_sharedPreferences = sharedPreferences.getString("user-token", "null");
+            if (!tokens_sharedPreferences.equals("null")) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }catch (Exception e){
+            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
+
+
+
 
     }
 
     public void signbtn(View v) {
+        progressBar.setVisibility(View.VISIBLE);
         insertuserinformation();
     }
 
@@ -78,6 +92,8 @@ public class LoginandregisterActivity extends AppCompatActivity {
         String userpassword = epassword.getText().toString().trim();
         String userphonenumber = ephonenumber.getText().toString().trim();
         if (!TextUtils.isEmpty(useremail) && !TextUtils.isEmpty(username) && !TextUtils.isEmpty(usersurname) && !TextUtils.isEmpty(userpassword) && !TextUtils.isEmpty(userphonenumber)) {
+            editor.clear();
+            editor.apply();
             UUID uuid = UUID.randomUUID();
             String stringtoken = uuid.toString();
             String url = "https://senan2.000webhostapp.com/SaleProject/loginSaleProject/insertuserinformation.php";
@@ -92,7 +108,9 @@ public class LoginandregisterActivity extends AppCompatActivity {
                             editor.putString("user-token", stringtoken);
                             editor.apply();
                             shownotification(username);
+                            button.setClickable(false);
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            progressBar.setVisibility(View.INVISIBLE);
                             startActivity(intent);
                             finish();
                         }
@@ -107,6 +125,7 @@ public class LoginandregisterActivity extends AppCompatActivity {
                     editor.putString("user-token", "null");
                     editor.apply();
                     Toast.makeText(LoginandregisterActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    button.setClickable(true);
                 }
             }) {
                 @Nullable
@@ -124,6 +143,7 @@ public class LoginandregisterActivity extends AppCompatActivity {
             };
             Volley.newRequestQueue(this).add(request);
         } else {
+            progressBar.setVisibility(View.INVISIBLE);
             Toast.makeText(this, "Gözlənilməyən xəta baş verdi", Toast.LENGTH_SHORT).show();
         }
 

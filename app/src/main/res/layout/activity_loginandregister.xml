@@ -14,8 +14,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="80dp"
         android:layout_marginRight="10dp"
-        app:cardCornerRadius="30dp"
         android:backgroundTint="#f8f8f8"
+        app:cardCornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -92,9 +92,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -114,14 +111,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
     </androidx.cardview.widget.CardView>
 
     <Button
+        android:id="@+id/signbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
         android:background="@drawable/backforbutton"
         android:backgroundTint="#e17874"
         android:onClick="signbtn"
@@ -132,7 +127,9 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/textView4"
@@ -162,6 +159,19 @@
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:backgroundTint="#9A7C23"
+        android:theme="@style/Base.Theme.MyProjectSale"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
