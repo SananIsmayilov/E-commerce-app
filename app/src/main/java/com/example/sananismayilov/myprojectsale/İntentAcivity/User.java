@@ -86,8 +86,6 @@ public class User extends AppCompatActivity {
             };
             Volley.newRequestQueue(this).add(request);
         }
-
-
     }
 
     public void updateuser() {

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 private EditText loginemail,loginpassword;
 private SharedPreferences sharedPreferences;
 private  SharedPreferences.Editor editor;
+ProgressBar progressBar;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -39,13 +41,14 @@ private  SharedPreferences.Editor editor;
 
         loginemail = findViewById(R.id.loginemail);
         loginpassword = findViewById(R.id.loginpassword);
+        progressBar = findViewById(R.id.progressBar3);
 
         sharedPreferences = this.getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity",MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
     }
     public void loginbtn(View v){
-
+        progressBar.setVisibility(View.VISIBLE);
       String loginemails = loginemail.getText().toString().trim();
       String loginpasswords = loginpassword.getText().toString().trim();
       if(!TextUtils.isEmpty(loginemails) && !TextUtils.isEmpty(loginpasswords)) {
@@ -64,6 +67,7 @@ private  SharedPreferences.Editor editor;
                           editor.putString("user-token", token);
                           editor.apply();
                           Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                          progressBar.setVisibility(View.INVISIBLE);
                           startActivity(intent);
                           finish();
                       } else if (code == 0) {

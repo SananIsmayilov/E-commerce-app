@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -38,6 +40,7 @@ public class UserOrder extends AppCompatActivity {
     SharedPreferences preferences;
     AdapterToOrders adapterToOrders;
     boolean statustocheckbox ;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class UserOrder extends AppCompatActivity {
         recyclerView = findViewById(R.id.recylerviewtoorders);
         preferences = this.getSharedPreferences("com.example.sananismayilov.myprojectsale.İntentAcivity", MODE_PRIVATE);
         statustocheckbox = preferences.getBoolean("checkboxstatus", false);
+        imageView = findViewById(R.id.imageVieworder);
         getOrders();
         if (!statustocheckbox) {
             Intent intent = new Intent(getApplicationContext(), OrderDetailsClass.class);
@@ -78,6 +82,9 @@ public class UserOrder extends AppCompatActivity {
                                 ConteynerToOrders conteyner = new ConteynerToOrders(productname, productmodel, status, productpicture);
                                 ordersArrayList.add(conteyner);
                             }
+
+                        }else {
+                            imageView.setVisibility(View.VISIBLE);
                         }
                         adapterToOrders = new AdapterToOrders(ordersArrayList);
                         recyclerView.setHasFixedSize(true);
